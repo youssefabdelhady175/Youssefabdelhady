@@ -1,0 +1,233 @@
+import { Recipe, User, GroceryList, MealPlan } from './types';
+
+// Mock recipes data
+export const mockRecipes: Recipe[] = [
+  {
+    id: '1',
+    title: 'Classic Margherita Pizza',
+    description: 'Traditional Italian pizza with fresh mozzarella, tomatoes, and basil',
+    ingredients: [
+      { id: '1', name: 'Pizza dough', quantity: 1, unit: 'ball', category: 'Bakery' },
+      { id: '2', name: 'Tomato sauce', quantity: 0.5, unit: 'cup', category: 'Canned' },
+      { id: '3', name: 'Fresh mozzarella', quantity: 8, unit: 'oz', category: 'Dairy' },
+      { id: '4', name: 'Fresh basil', quantity: 0.25, unit: 'cup', category: 'Produce' },
+      { id: '5', name: 'Olive oil', quantity: 2, unit: 'tbsp', category: 'Pantry' }
+    ],
+    instructions: [
+      'Preheat oven to 475°F (245°C)',
+      'Roll out pizza dough on a floured surface',
+      'Spread tomato sauce evenly on dough',
+      'Tear mozzarella into pieces and distribute',
+      'Drizzle with olive oil',
+      'Bake for 12-15 minutes until crust is golden',
+      'Top with fresh basil before serving'
+    ],
+    cookingTime: 15,
+    prepTime: 20,
+    servings: 4,
+    difficulty: 'Medium',
+    category: 'Main Course',
+    tags: ['Italian', 'Vegetarian', 'Quick'],
+    nutritionalInfo: {
+      calories: 285,
+      protein: 12,
+      carbs: 36,
+      fat: 10,
+      fiber: 2,
+      sugar: 4,
+      sodium: 590
+    },
+    ratings: [
+      { userId: '1', rating: 5, comment: 'Perfect pizza!', createdAt: new Date('2024-01-15') },
+      { userId: '2', rating: 4, comment: 'Great recipe, easy to follow', createdAt: new Date('2024-01-20') }
+    ],
+    images: ['/api/placeholder/400/300'],
+    authorId: '1',
+    createdAt: new Date('2024-01-01'),
+    updatedAt: new Date('2024-01-01')
+  },
+  {
+    id: '2',
+    title: 'Chicken Stir Fry',
+    description: 'Quick and healthy chicken stir fry with mixed vegetables',
+    ingredients: [
+      { id: '6', name: 'Chicken breast', quantity: 1, unit: 'lb', category: 'Meat' },
+      { id: '7', name: 'Bell peppers', quantity: 2, unit: 'pieces', category: 'Produce' },
+      { id: '8', name: 'Broccoli', quantity: 1, unit: 'head', category: 'Produce' },
+      { id: '9', name: 'Soy sauce', quantity: 3, unit: 'tbsp', category: 'Pantry' },
+      { id: '10', name: 'Garlic', quantity: 3, unit: 'cloves', category: 'Produce' },
+      { id: '11', name: 'Ginger', quantity: 1, unit: 'inch', category: 'Produce' },
+      { id: '12', name: 'Vegetable oil', quantity: 2, unit: 'tbsp', category: 'Pantry' }
+    ],
+    instructions: [
+      'Cut chicken into bite-sized pieces',
+      'Chop vegetables into uniform pieces',
+      'Heat oil in a large wok or skillet',
+      'Cook chicken until golden brown, remove and set aside',
+      'Stir fry vegetables until crisp-tender',
+      'Return chicken to pan, add soy sauce',
+      'Stir everything together and serve hot'
+    ],
+    cookingTime: 15,
+    prepTime: 15,
+    servings: 4,
+    difficulty: 'Easy',
+    category: 'Main Course',
+    tags: ['Asian', 'Healthy', 'Quick', 'Gluten-Free'],
+    nutritionalInfo: {
+      calories: 220,
+      protein: 25,
+      carbs: 12,
+      fat: 8,
+      fiber: 4,
+      sugar: 8,
+      sodium: 680
+    },
+    ratings: [
+      { userId: '2', rating: 5, comment: 'So quick and delicious!', createdAt: new Date('2024-01-18') }
+    ],
+    images: ['/api/placeholder/400/300'],
+    authorId: '2',
+    createdAt: new Date('2024-01-05'),
+    updatedAt: new Date('2024-01-05')
+  },
+  {
+    id: '3',
+    title: 'Chocolate Chip Cookies',
+    description: 'Classic homemade chocolate chip cookies that are crispy on the outside and chewy inside',
+    ingredients: [
+      { id: '13', name: 'All-purpose flour', quantity: 2.25, unit: 'cups', category: 'Pantry' },
+      { id: '14', name: 'Butter', quantity: 1, unit: 'cup', category: 'Dairy' },
+      { id: '15', name: 'Brown sugar', quantity: 0.75, unit: 'cup', category: 'Pantry' },
+      { id: '16', name: 'White sugar', quantity: 0.25, unit: 'cup', category: 'Pantry' },
+      { id: '17', name: 'Eggs', quantity: 2, unit: 'large', category: 'Dairy' },
+      { id: '18', name: 'Vanilla extract', quantity: 2, unit: 'tsp', category: 'Pantry' },
+      { id: '19', name: 'Chocolate chips', quantity: 2, unit: 'cups', category: 'Pantry' }
+    ],
+    instructions: [
+      'Preheat oven to 375°F (190°C)',
+      'Cream butter and sugars until light and fluffy',
+      'Beat in eggs and vanilla',
+      'Gradually mix in flour',
+      'Fold in chocolate chips',
+      'Drop rounded tablespoons onto baking sheet',
+      'Bake 9-11 minutes until golden brown',
+      'Cool on baking sheet for 2 minutes before transferring'
+    ],
+    cookingTime: 11,
+    prepTime: 15,
+    servings: 24,
+    difficulty: 'Easy',
+    category: 'Dessert',
+    tags: ['Dessert', 'Baking', 'Sweet', 'Family-Friendly'],
+    nutritionalInfo: {
+      calories: 180,
+      protein: 2,
+      carbs: 24,
+      fat: 9,
+      fiber: 1,
+      sugar: 16,
+      sodium: 95
+    },
+    ratings: [
+      { userId: '1', rating: 5, comment: 'Best cookies ever!', createdAt: new Date('2024-01-22') },
+      { userId: '3', rating: 4, comment: 'Kids loved them', createdAt: new Date('2024-01-25') }
+    ],
+    images: ['/api/placeholder/400/300'],
+    authorId: '3',
+    createdAt: new Date('2024-01-10'),
+    updatedAt: new Date('2024-01-10')
+  }
+];
+
+// Mock users data
+export const mockUsers: User[] = [
+  {
+    id: '1',
+    name: 'Sarah Johnson',
+    email: 'sarah@example.com',
+    avatar: '/api/placeholder/100/100',
+    preferences: {
+      dietaryRestrictions: ['Vegetarian'],
+      cuisineTypes: ['Italian', 'Mediterranean'],
+      cookingLevel: 'Intermediate',
+      servings: 4
+    },
+    savedRecipes: ['1', '3'],
+    cookingHistory: [
+      { recipeId: '1', cookedAt: new Date('2024-01-20'), rating: 5, notes: 'Added extra basil' }
+    ],
+    createdAt: new Date('2024-01-01')
+  },
+  {
+    id: '2',
+    name: 'Mike Chen',
+    email: 'mike@example.com',
+    avatar: '/api/placeholder/100/100',
+    preferences: {
+      dietaryRestrictions: [],
+      cuisineTypes: ['Asian', 'American'],
+      cookingLevel: 'Beginner',
+      servings: 2
+    },
+    savedRecipes: ['2'],
+    cookingHistory: [
+      { recipeId: '2', cookedAt: new Date('2024-01-18'), rating: 5 }
+    ],
+    createdAt: new Date('2024-01-05')
+  }
+];
+
+// Recipe categories
+export const categories = [
+  'Appetizers',
+  'Main Course',
+  'Dessert',
+  'Breakfast',
+  'Lunch',
+  'Dinner',
+  'Snacks',
+  'Beverages',
+  'Salads',
+  'Soups'
+];
+
+// Dietary tags
+export const dietaryTags = [
+  'Vegetarian',
+  'Vegan',
+  'Gluten-Free',
+  'Dairy-Free',
+  'Keto',
+  'Low-Carb',
+  'High-Protein',
+  'Healthy'
+];
+
+// Cuisine types
+export const cuisineTypes = [
+  'Italian',
+  'Asian',
+  'Mexican',
+  'American',
+  'Mediterranean',
+  'Indian',
+  'French',
+  'Thai',
+  'Chinese',
+  'Japanese'
+];
+
+// Grocery categories
+export const groceryCategories = [
+  'Produce',
+  'Meat',
+  'Dairy',
+  'Pantry',
+  'Bakery',
+  'Frozen',
+  'Canned',
+  'Beverages',
+  'Snacks',
+  'Other'
+];
